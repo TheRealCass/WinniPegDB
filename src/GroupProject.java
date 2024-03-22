@@ -69,7 +69,7 @@ public class GroupProject {
 	}
 
 	private static void printHelp() {
-		System.out.println("Library database");
+		System.out.println("City of Winnipeg: New Resident Information Panel");
 		System.out.println("Commands:");
 		System.out.println("h - Get help");
 		System.out.println("pc - Get WFPS Performence Mesures");
