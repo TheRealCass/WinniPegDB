@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class CS3380A3Q3 {
 	static Connection connection;
-	public static final String COMMAND_ONE = "command1";
+	public static final String COMMAND_ONE = "pc";
 	public static final String COMMAND_TWO = "command2";
 	public static final String COMMAND_THREE = "command3";
 	public static final String COMMAND_FOUR = "command4";
@@ -72,11 +72,14 @@ public class CS3380A3Q3 {
 		System.out.println("Library database");
 		System.out.println("Commands:");
 		System.out.println("h - Get help");
-		System.out.println("s <name> - Search for a name");
-		System.out.println("l <id> - Search for a user by id");
-		System.out.println("sell <author id> - Search for a stores that sell books by this id");
-		System.out.println("notread - Books not read by its own author");
-
+		System.out.println("pc - Get WFPS Performence Mesures");
+		System.out.println("danger - Moto Vehicle Incident prone areas");
+		System.out.println("rank1 <year> - ranking WFPS teams by the number of incidents they responeded in a time period of a year");
+		System.out.println("rank2 - <year> not read by its own author");
+		System.out.println(".");
+		System.out.println(".");
+		System.out.println(".");
+		
 		System.out.println("q - Exit the program");
 
 		System.out.println("---- end help ----- ");
