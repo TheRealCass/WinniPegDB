@@ -24,6 +24,7 @@ public class GroupProject {
 	}
 
 	public static void runConsole(MyDatabase db) {
+		String dilimiter = "\\s+";
 
 		Scanner console = new Scanner(System.in);
 		System.out.print(INTRO_LINE);
@@ -33,7 +34,7 @@ public class GroupProject {
 		String arg = "";
 
 		while (line != null && !line.equals(QUIT_COMMAND)) {
-			parts = line.split("\\s+");
+			parts = line.split(dilimiter);
 			if (line.indexOf(" ") > 0){
 				arg = line.substring(line.indexOf(" ")).trim();
 			}

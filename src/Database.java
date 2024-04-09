@@ -28,7 +28,7 @@ class MyDatabase {
 						"FROM " +  
 							"Addresses a " + 
 						"JOIN " +  
-							"Council c " + 
+							"Councillors c " + 
 						"ON " +  
 							"a.Ward = c.WardName " + 
 						"WHERE " +  
@@ -85,7 +85,7 @@ class MyDatabase {
 						"FROM " + 
 							"ServiceCalls " +
 						"JOIN " + 
-							"Council " + 
+							"Councillors " + 
 						"ON " +
 							"ServiceCalls.Ward = Council.WardName " + 
 						"GROUP BY " + 
