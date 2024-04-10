@@ -24,7 +24,8 @@ class MyDatabase {
 		String sql =    "SELECT " +
 							"a.Ward AS Ward, " +
 							"c.Person AS Councillor, " +
-							"c.Phone AS Phone " + 
+							"c.Phone AS Phone, " + 
+							"c.Year AS year " + 
 						"FROM " +  
 							"Addresses a " + 
 						"JOIN " +  
@@ -47,10 +48,11 @@ class MyDatabase {
 				String ward = rs.getString("Ward");
 				String councillor = rs.getString("Councillor");
 				String phoneNumber = rs.getString("Phone");
+				String year = rs.getString("year");
 				if (phoneNumber == null ) {
 					phoneNumber = "not avalable in this database";
 				}
-				String msg = councillor + " is in charge of " + ward + " which covers " + address + ". Their contact info is " + phoneNumber + ".";
+				String msg = "In " + year + ", " + councillor + "was in charge of " + ward + "which covers " + address + ".\n\tTheir phone number is " + phoneNumber + ".";
                 System.out.println( msg);
             }
 
@@ -131,6 +133,40 @@ class MyDatabase {
 
 	//4
 	public void commandFour() {
+
+		int potholeComplainThrushold = 8;
+		
+		String sql =    "SELECT " +
+							"Neighbourhood, " +
+							"COUNT(*) AS PotholeRequests " +
+						"FROM " +
+							"ServiceCalls " +
+						"WHERE " +
+							"ServiceRequest = 'Potholes' " +
+								"AND " +
+									"(Year = 2022 OR Year = 2023) " +
+						"GROUP BY " +
+							"Neighbourhood " +
+						"HAVING COUNT(DISTINCT Year) = 2 " +
+							"AND " +
+								"PotholeRequests > " + potholeComplainThrushold + " " +
+						"ORDER BY " +
+							"PotholeRequests " +
+								"DESC;";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+				String neighbourhood = rs.getString("Neighbourhood");
+				String requestCount = rs.getString("PotholeRequests");
+				String msg = neighbourhood + "\t----->\t" + requestCount + " complaints.";
+                System.out.println(msg);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 		
 	}
 
@@ -138,31 +174,25 @@ class MyDatabase {
 	public void commandFive() {
 
 		String sql =    "SELECT " +
-							"ServiceRequest AS Event, " + 
-							"Person AS Councillor, " + 
-							"ServiceCalls.ward, " +
-							"ServiceCalls.year AS eventYear, " + 
-							"Councillors.year AS inChargeYear " + 
-						"FROM " + 
-							"ServiceCalls " +
-						"JOIN " + 
-							"Councillors " + 
-						"ON " +
-							"ServiceCalls.Ward = Councillors.WardName " +  
-						"WHERE " +
-							"eventYear = inChargeYear " + 
-						"GROUP BY " + 
-							"ServiceRequest";
+							"LOWER(Neighbourhood) AS ngbhd, " +
+							"MAX(WaterAreainHectares) AS MaxWaterArea " +
+						"FROM " +
+							"Parks " +
+						"GROUP BY " +
+							"ngbhd " +
+						"ORDER BY " +
+							"MaxWaterArea " +
+								"DESC " +
+						"LIMIT " +
+							"10";
         try {
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-				String serviceRequest = rs.getString("Event");
-				String councillor = rs.getString("Councillor");
-				String ward = rs.getString("ward");
-				String eventYear = rs.getString("eventYear");
-				String msg = ward + " has the most complains regarding " + serviceRequest + " in " + eventYear + ".\n\t" + councillor + " was in charge of this ward during this time.";
+				String neighbourhood = rs.getString("ngbhd");
+				String water = rs.getString("MaxWaterArea");
+				String msg = neighbourhood + " \t---->\t" + water + " sqaure hectors of water area enclosed within it.";
                 System.out.println(msg);
             }
 
