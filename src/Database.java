@@ -47,6 +47,9 @@ class MyDatabase {
 				String ward = rs.getString("Ward");
 				String councillor = rs.getString("Councillor");
 				String phoneNumber = rs.getString("Phone");
+				if (phoneNumber == null ) {
+					phoneNumber = "not avalable in this database";
+				}
 				String msg = councillor + " is in charge of " + ward + " which covers " + address + ". Their contact info is " + phoneNumber + ".";
                 System.out.println( msg);
             }
@@ -57,9 +60,37 @@ class MyDatabase {
 	}
 
 	//2
-	public void commandTwo() {
-        
+	public void commandTwo(String maxArea) {
+		String sql =    "SELECT " +
+							"ParkName, " +
+							"(TotalAreainHectares-WaterAreainHectares) AS LandArea, " +
+							"WaterAreainHectares AS waterArea " +
+						"FROM " +
+							"Parks " +
+						"WHERE " + 
+							"TotalAreainHectares >= ?" + 
+						"ORDER BY " +
+							"TotalAreainHectares DESC ";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+			
+			//using our wildcard to set variables in sql statemet
+            pstmt.setString(1, maxArea);
 
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+				String name = rs.getString("ParkName");
+				String land = rs.getString("LandArea");
+				String water = rs.getString("waterArea");
+				String msg = name + " has " + land + " square hectors of land and " + water + " square hectors of water.";
+                System.out.println( msg);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+			
 	}
 
 	//3
@@ -94,7 +125,6 @@ class MyDatabase {
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
 
-			System.out.println("ward\t\tservice request\t\tcouncillor in charge\t\tyear of office");
             while (rs.next()) {
 				String serviceRequest = rs.getString("Event");
 				String councillor = rs.getString("Councillor");

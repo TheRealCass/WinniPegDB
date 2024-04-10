@@ -51,9 +51,16 @@ public class GroupProject {
 				}
 			
 			} else if (parts[0].equals(COMMAND_TWO)) {
+				
+				try {
+					if (parts.length >= 2)
+						db.commandTwo(arg);
+					else
+						System.out.println("Require an argument for this command");
+				} catch (Exception e) {
+					System.out.println("id must be an integer");
+				}
 
-
-			
 			} else if (parts[0].equals(COMMAND_THREE)) {
 
 
@@ -79,7 +86,8 @@ public class GroupProject {
 		String commandOneDiscription = "Given a address, what ward does it belong to and who (councillor) is in charge of said ward, and how do i get in contact with him.";
 		commandOneDiscription += "\n\tEscalating event at a certain location? Lets you contact the councillor in charge to help resolve conflict.";
 
-		String commandTwoDiscription = "";
+		String commandTwoDiscription = "Given a minimun space constaint (in square hectors), shows all the parks and open spaces in the city and the land and water area (in Hectors) elnclosed within each park.";
+		commandTwoDiscription += "\n\tPlanning a outdoor city event? Take a look at park and open spaces that may be able to accomodate your a event";
 
 		String commandThreeDiscription = "";
 
@@ -91,7 +99,7 @@ public class GroupProject {
 		System.out.println(DBMS_NAME);
 		System.out.println("Commands:");
 		System.out.println(COMMAND_ONE + " <desired address to look up> - " + commandOneDiscription);
-		System.out.println(COMMAND_TWO + " - " + commandTwoDiscription);
+		System.out.println(COMMAND_TWO + " <minimun area needed> - " + commandTwoDiscription);
 		System.out.println(COMMAND_THREE + " - " + commandThreeDiscription);
 		System.out.println(COMMAND_FOUR + " - " + commandFourDiscription);
 		System.out.println(COMMAND_FIVE + " - " + commandFiveDiscription);
