@@ -64,7 +64,8 @@ class MyDatabase {
 		String sql =    "SELECT " +
 							"ParkName, " +
 							"(TotalAreainHectares-WaterAreainHectares) AS LandArea, " +
-							"WaterAreainHectares AS waterArea " +
+							"WaterAreainHectares AS waterArea, " +
+							"LocationDescription AS location " +
 						"FROM " +
 							"Parks " +
 						"WHERE " + 
@@ -83,7 +84,8 @@ class MyDatabase {
 				String name = rs.getString("ParkName");
 				String land = rs.getString("LandArea");
 				String water = rs.getString("waterArea");
-				String msg = name + " has " + land + " square hectors of land and " + water + " square hectors of water.";
+				String location = rs.getString("location");
+				String msg = name + " has " + land + " square hectors of land and " + water + " square hectors of water.\n\tIt is located at " + location + ".";
                 System.out.println( msg);
             }
 
@@ -95,9 +97,35 @@ class MyDatabase {
 
 	//3
 	public void commandThree() {
-		
-		
 
+		String sql =    "SELECT " +
+							"person, " + 
+							"WardName, " + 
+							"Position, " +
+							"phone, " + 
+							"fax " + 
+						"FROM " + 
+							"Councillors " +
+						"WHERE " +
+							"CurrentCouncil = 'TRUE' ";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+				String person = rs.getString("person");
+				String ward = rs.getString("WardName");
+				String rank = rs.getString("Position");
+				String phone = rs.getString("phone");
+				String fax = rs.getString("fax");
+				String msg = person + " is the " + rank + " of " + ward + ".\n\tTheir phone number is " + phone + ".\n\tTheir fax number is " + fax + ".";
+                System.out.println(msg);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+			
 	}
 
 
@@ -112,13 +140,17 @@ class MyDatabase {
 		String sql =    "SELECT " +
 							"ServiceRequest AS Event, " + 
 							"Person AS Councillor, " + 
-							"ward, year " + 
+							"ServiceCalls.ward, " +
+							"ServiceCalls.year AS eventYear, " + 
+							"Councillors.year AS inChargeYear " + 
 						"FROM " + 
 							"ServiceCalls " +
 						"JOIN " + 
 							"Councillors " + 
 						"ON " +
-							"ServiceCalls.Ward = Council.WardName " + 
+							"ServiceCalls.Ward = Councillors.WardName " +  
+						"WHERE " +
+							"eventYear = inChargeYear " + 
 						"GROUP BY " + 
 							"ServiceRequest";
         try {
@@ -129,10 +161,9 @@ class MyDatabase {
 				String serviceRequest = rs.getString("Event");
 				String councillor = rs.getString("Councillor");
 				String ward = rs.getString("ward");
-				String year = rs.getString("year");
-				String msg = ward + " has the most complains regarding " + serviceRequest + ". " + councillor + " was in charge of this ward in " + year + ".";
-				//String msg = ward + "\t\t" + serviceRequest + "\t\t" + councillor + "\t\t" + year;
-                System.out.println( msg);
+				String eventYear = rs.getString("eventYear");
+				String msg = ward + " has the most complains regarding " + serviceRequest + " in " + eventYear + ".\n\t" + councillor + " was in charge of this ward during this time.";
+                System.out.println(msg);
             }
 
         } catch (SQLException e) {

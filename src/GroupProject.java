@@ -62,8 +62,8 @@ public class GroupProject {
 				}
 
 			} else if (parts[0].equals(COMMAND_THREE)) {
-
-
+				
+				db.commandThree();
 			
 			} else if (parts[0].equals(COMMAND_FOUR)) {
 
@@ -89,12 +89,12 @@ public class GroupProject {
 		String commandTwoDiscription = "Given a minimun space constaint (in square hectors), shows all the parks and open spaces in the city and the land and water area (in Hectors) elnclosed within each park.";
 		commandTwoDiscription += "\n\tPlanning a outdoor city event? Take a look at park and open spaces that may be able to accomodate your a event";
 
-		String commandThreeDiscription = "";
+		String commandThreeDiscription = "List all the current councillors and the wards they are in charge of and their contact info.";
 
 		String commandFourDiscription = "";
 		
-		String commandFiveDiscription = "What were the most service requests in the city, and which ward they occured, and which councillors were in charge of said ward (and in which year they were in charge).";
-		commandFiveDiscription += "\n\tEssentially, lets you take a look at what were the dificianncies of the councillor and in wards these dificiancies occured. It also shows which year the councillors where in charge";
+		String commandFiveDiscription = "What were the most service requests in the city, and which ward they occured, and which councillors were in charge of said ward (during the crisis event).";
+		commandFiveDiscription += "\n\tEssentially, lets you take a look at what were the deficiencis of the wards and which councillor lead to said deficiencies";
 
 		System.out.println(DBMS_NAME);
 		System.out.println("Commands:");

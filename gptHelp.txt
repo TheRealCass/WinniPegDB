@@ -1,7 +1,3 @@
-
-Number of Service Calls per Neighbourhood This query can help identify which neighbourhoods are generating the most service calls, which could indicate areas where city services may need to be improved.
-SQL
-
 SELECT Neighbourhood, COUNT(*) AS NumberOfCalls
 FROM ServiceCalls
 GROUP BY Neighbourhood
@@ -16,33 +12,11 @@ ORDER BY RequestCount DESC;
 Parks with the Largest Area This query can help identify the largest parks in the city, which could be useful for planning events or allocating maintenance resources.
 SQL
 
-SELECT ParkName, TotalAreainHectares
-FROM Parks
-ORDER BY TotalAreainHectares DESC;
-AI-generated code. Review and use carefully. More info on FAQ.
-Number of Paramedic Calls per Neighbourhood This query can help identify which neighbourhoods have the highest number of paramedic calls, which could indicate areas where health services may need to be improved.
-SQL
-
-SELECT Neighbourhood, COUNT(*) AS NumberOfCalls
-FROM ParamedicCalls
-GROUP BY Neighbourhood
-ORDER BY NumberOfCalls DESC;
-AI-generated code. Review and use carefully. More info on FAQ.
-Councillors and Their Wards This query can provide a list of councillors along with their wards, which could be useful for contacting councillors about issues in their wards.
-SQL
-
 SELECT WardName, Person
 FROM Councillors
 ORDER BY WardName;
 AI-generated code. Review and use carefully. More info on FAQ.
 These queries should provide a good starting point for analyzing the data. They can be modified or expanded upon depending on the specific needs and questions of the mayor.
-
-
-
-You
-these querries are far to simple. Give me 5 querries that are more complex and would help the mayor duelve deeper into the problem to fix it
-Copilot
-Sure, here are five more complex SQL queries that could provide deeper insights:
 
 Service Calls by Month and Neighbourhood This query can help identify trends in service calls over time and across different neighbourhoods.
 SQL
