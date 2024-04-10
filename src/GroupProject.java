@@ -91,7 +91,7 @@ public class GroupProject {
 		commandTwoDiscription += "\nPlanning a outdoor city event? Take a look at park and open spaces that may be able to accomodate your a event";
 
 		String commandThreeDiscription = "List all the CURRENT councillors and the wards they are in charge of and their contact info.";
-		commandThreeDiscription += "\n";
+		//commandThreeDiscription += "\n";
 
 		String commandFourDiscription = "List the neighbourhood that has has more than 8 pothole complaint in the last 2 years stright";
 		//commandFourDiscription += "Areas in need of public infastructure repair on a macro scale\n";
