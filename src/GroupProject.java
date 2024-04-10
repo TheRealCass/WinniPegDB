@@ -8,6 +8,7 @@ public class GroupProject {
 	private static final String COMMAND_THREE = "council";
 	private static final String COMMAND_FOUR = "potholes";
 	private static final String COMMAND_FIVE = "devArea";
+	private static final String COMMAND_SIX = "addCouncil";
 	private static final String QUIT_COMMAND = "q";
 	private static final String HELP_COMMAND = "h";
 	private static final String BUILD_RESON = "This DB was creadted so that the Mayor could make better informed decition for WPG city\n";
@@ -71,8 +72,21 @@ public class GroupProject {
 				db.commandFour();
 			
 			} else if (parts[0].equals(COMMAND_FIVE)) {
+
 				db.commandFive();
-			} else{
+
+			} else if (parts[0].equals(COMMAND_SIX)) {
+				
+				try {
+					if (parts.length >= 2)
+						db.commandSix(arg);
+					else
+						System.out.println("Require an argument for this command");
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+
+			}else{
 				System.out.println("Read the help with h, or find help somewhere else.");
 			}
 
@@ -99,6 +113,9 @@ public class GroupProject {
 		String commandFiveDiscription = "Top 10 Neighbourhoods with biggest water area near them";
 		commandFiveDiscription += "\nRevenue shrinking? Looking for developers to invest in the city? Here's some fancy neighbourhoods with water flowing through it's parks";
 
+		String commandSixDiscription = "Given a ward, new Person (and his contact info) and new year (must be greater than 2023), onbord them as a Concillor in the DB";
+		commandSixDiscription += "\nNew Councillor in charge of ward? Qickly change who is the new councillor in charge to keep DB up-to-date";
+
 		System.out.println("\n" + DBMS_NAME);
 		System.out.println("Commands:\n");
 		System.out.println(COMMAND_ONE + " <desired address to look up>\n" + commandOneDiscription + "\n");
@@ -106,6 +123,7 @@ public class GroupProject {
 		System.out.println(COMMAND_THREE + "\n" + commandThreeDiscription + "\n");
 		System.out.println(COMMAND_FOUR + "\n" + commandFourDiscription + "\n");
 		System.out.println(COMMAND_FIVE + "\n" + commandFiveDiscription + "\n");
+		System.out.println(COMMAND_SIX + " <ward,name,year>\n" + commandSixDiscription + "\n");
 		System.out.println(HELP_COMMAND + " - Get help" + "\n");
 		System.out.println(QUIT_COMMAND + " - Exit the program" + "\n");
 		System.out.println("---- end help ----- ");

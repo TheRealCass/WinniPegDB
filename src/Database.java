@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 class MyDatabase {
 	private Connection connection;
@@ -202,5 +203,101 @@ class MyDatabase {
 			
 	}
 
+    public void commandSix(String input) {
+
+		String msg[] = input.split(",");
+		String ward = msg[0];
+		String name = msg[1];
+		String year = msg[2];
 	
+		boolean found = checkForPLaces(ward);
+
+		Scanner scan = null;
+		
+		if (found) {
+
+
+
+			try {
+				connection.setAutoCommit(false); // start transaction
+	
+				// update statement
+				String sqlUpdate = "UPDATE Councillors SET CurrentCouncil = 'FALSE' WHERE wardName = ? AND CurrentCouncil = 'TRUE'";
+				PreparedStatement pstmtUpdate = connection.prepareStatement(sqlUpdate);
+				pstmtUpdate.setString(1, ward);
+				pstmtUpdate.execute();
+				
+
+				
+
+
+				// insert statement
+				String sqlInsert = "INSERT INTO Councillors (WardName, Person, Position, Year, CurrentCouncil) VALUES (?, ?, 'Councillor', ?, 'TRUE')";
+				PreparedStatement pstmtInsert = connection.prepareStatement(sqlInsert);
+				pstmtInsert.setString(1, ward);
+				pstmtInsert.setString(2, name);
+				pstmtInsert.setString(3, year);
+
+				pstmtInsert.execute();
+	
+				connection.commit(); // commit transaction
+	
+			} catch (SQLException e) {
+				try {
+					if (connection != null) {
+						connection.rollback(); // rollback transaction in case of an error
+					}
+				} catch (SQLException ex) {
+					System.out.println(ex.getMessage());
+				}
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (connection != null) {
+						connection.setAutoCommit(true); // restore default commit behavior
+					}
+				} catch (SQLException ex) {
+					System.out.println(ex.getMessage());
+				}
+				System.out.println("Old Concillor has been taken offduty and new on-duty councillor has been added to the DB");
+				System.out.println("run the 'council' command to verify");
+			}
+		} else {
+			System.out.println("ward named " + ward + " does not exist");
+		}
+
+	}
+	
+
+
+	private boolean checkForPLaces(String ward) {
+		
+		boolean found = false;
+
+		String sql =    "SELECT " +
+							"WardName " +
+						"from " +
+							"Councillors " +
+						"join " +
+							"Addresses " +
+						"on " +
+							"Councillors.WardName = Addresses.Ward " +
+						"group by " +
+							"WardName";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+				String wardName = rs.getString("wardName");
+				if (wardName.equals(ward)) {
+					found = true;
+				}
+
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return found;
+	}
 }
