@@ -5,7 +5,10 @@ This is a Java-based console application that interacts with the City of Winnipe
 ## Getting Started
 
 1. To run the application, you need to have Java installed on your machine.
-2. After that, you can run the `GroupProject` class which contains the `main` method. Alternatively, just type in `make run` and hit enter,and DBMS should be initated
+2. Compile the `GroupProject.java` file in the `src` folder to create a class file. You can run the `GroupProject.class` file, which contains the `main` method.
+
+Alternatively, just type in `make run` and hit enter,and DBMS should be initated
+
 3. Type in `h` and hit enter to see all the avalable commands.
 
 ## Commands
