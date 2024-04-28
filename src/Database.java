@@ -19,7 +19,7 @@ class MyDatabase {
 
 	}
 
-	//1
+	
 	public void commandOne(String address) { 
 	
 		String sql =    "SELECT " +
@@ -53,7 +53,7 @@ class MyDatabase {
 				if (phoneNumber == null ) {
 					phoneNumber = "not avalable in this database";
 				}
-				String msg = "In " + year + ", " + councillor + "was in charge of " + ward + "which covers " + address + ".\n\tTheir phone number is " + phoneNumber + ".";
+				String msg = "In " + year + ", " + councillor + " was in charge of " + ward + " which covers " + address + ".\n\tTheir phone number is " + phoneNumber + ".";
                 System.out.println( msg);
             }
 
