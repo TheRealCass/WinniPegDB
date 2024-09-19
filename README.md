@@ -32,6 +32,9 @@ Additionally, you can use `q` to exit the program.
 ## Exiting the Program
 
 To exit the program, simply type `q` at the `db > ` prompt.
+---
+Here is a picture of the inital UI of the program
+![alt text](ss.png)
 
 
 
