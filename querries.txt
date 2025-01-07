@@ -1,28 +1,57 @@
-//command 1
-SELECT 
-    a.Ward AS Ward,
-    c.Person AS Councillor,
-    c.Phone AS Phone
-FROM 
-    Addresses a
-JOIN 
-    Council c
-ON 
-    a.Ward = c.WardName
-WHERE 
-    LOWER(a.FullAddress) = LOWER(?)
-GROUP BY
-	Councillor;
+Total Number of Paramedic Calls by Year:
+SELECT OpeningYear, COUNT(*) AS TotalCalls
+FROM ParamedicCalls
+GROUP BY OpeningYear
+ORDER BY OpeningYear;
 
 
-//command 5
-SELECT
-    ServiceRequest, Person, ward, year
-FROM
-    ServiceCalls
-JOIN
-    Council 
-ON
-    ServiceCalls.Ward = Council.WardName
-GROUP BY
-    ServiceRequest;
+Number of Paramedic Calls by Neighbourhood:
+SELECT Neighbourhood, COUNT(*) AS TotalCalls
+FROM ParamedicCalls
+GROUP BY Neighbourhood
+ORDER BY TotalCalls DESC;
+
+
+List of Councillors and Their Wards:
+SELECT WardName, Person, Position, Year, CurrentCouncil
+FROM Councillors
+ORDER BY WardName;
+
+
+Total Area of Parks by Neighbourhood:
+SELECT Neighbourhood, SUM(TotalAreainHectares) AS TotalArea
+FROM Parks
+GROUP BY Neighbourhood
+ORDER BY TotalArea DESC;
+
+
+Number of Parks by Classification Type:
+SELECT ClassificationType, COUNT(*) AS TotalParks
+FROM Parks
+GROUP BY ClassificationType
+ORDER BY TotalParks DESC;
+
+
+Paramedic Calls During a Specific Month and Year:
+SELECT *
+FROM ParamedicCalls
+WHERE Openingmonth = 7 AND OpeningYear = 2023;
+
+
+Neighbourhoods with the Most Paramedic Calls Involving Motor Vehicle Incidents:
+SELECT Neighbourhood, COUNT(*) AS TotalMotorVehicleIncidents
+FROM ParamedicCalls
+WHERE MotorVehicleIncident = 'Yes'
+GROUP BY Neighbourhood
+ORDER BY TotalMotorVehicleIncidents DESC;
+
+Average Response Time for Paramedic Calls:
+SELECT AVG(julianday(ClosedTime) - julianday(Openingtime)) * 24 * 60 AS AvgResponseTimeInMinutes
+FROM ParamedicCalls;
+
+List of Addresses with the Most Paramedic Calls:
+SELECT a.FullAddress, COUNT(*) AS TotalCalls
+FROM Addresses a
+JOIN ParamedicCalls p ON a.Neighbourhood = p.Neighbourhood
+GROUP BY a.FullAddress
+ORDER BY TotalCalls DESC;

@@ -98,35 +98,34 @@ public class GroupProject {
 	}
 
 	private static void printHelp() {
-		String commandOneDiscription = "Given a address, which ward does it belong to and who (councillor) is in charge of said ward, and how do i get in contact with him.";
-		commandOneDiscription += "\nEscalating event at a certain location? Lets you contact the councillor in charge to help resolve conflict.";
+		String commandOneDescription = "Given an address, identify the corresponding ward and the councillor in charge. Contact information for the councillor is also provided.";
+		commandOneDescription += "\nIn case of an escalating event at a specific location, contact the responsible councillor to help resolve the conflict.";
 
-		String commandTwoDiscription = "Given a minimun space constaint (in square hectors), shows all the parks and open spaces in the city and the land and water area (in Hectors) elnclosed within each park.";
-		commandTwoDiscription += "\nPlanning a outdoor city event? Take a look at park and open spaces that may be able to accomodate your a event";
+		String commandTwoDescription = "Given a minimum space constraint (in square hectares), list all parks and open spaces in the city that meet the requirement, including land and water areas enclosed within each park.";
+		commandTwoDescription += "\nUseful for planning outdoor city events by identifying suitable parks and open spaces.";
 
-		String commandThreeDiscription = "List all the CURRENT councillors and the wards they are in charge of and their contact info.";
-		//commandThreeDiscription += "\n";
+		String commandThreeDescription = "List all current councillors along with the wards they oversee and their contact information.";
 
-		String commandFourDiscription = "List the neighbourhood that has has more than 8 pothole complaint in the last 2 years stright";
-		//commandFourDiscription += "Areas in need of public infastructure repair on a macro scale\n";
+		String commandFourDescription = "List neighbourhoods with more than 8 pothole complaints in the last 2 years.";
 
-		String commandFiveDiscription = "Top 10 Neighbourhoods with biggest water area near them";
-		commandFiveDiscription += "\nRevenue shrinking? Looking for developers to invest in the city? Here's some fancy neighbourhoods with water flowing through it's parks";
+		String commandFiveDescription = "Identify the top 10 neighbourhoods with the largest water areas nearby.";
+		commandFiveDescription += "\nUseful for attracting developers by highlighting neighbourhoods with water features in their parks.";
 
-		String commandSixDiscription = "Given a ward, new Person (and his contact info) and new year (must be greater than 2023), onbord them as a Concillor in the DB";
-		commandSixDiscription += "\nNew Councillor in charge of ward? Qickly change who is the new councillor in charge to keep DB up-to-date";
+		String commandSixDescription = "Given a ward, new councillor's name, and year (must be greater than 2023), onboard them as a councillor in the database.";
+		commandSixDescription += "\nQuickly change who is the new councillor in charge to keep the database up-to-date.";
 
 		System.out.println("\n" + DBMS_NAME);
 		System.out.println("Commands:\n");
-		System.out.println(COMMAND_ONE + " <desired address to look up>\n" + commandOneDiscription + "\n");
-		System.out.println(COMMAND_TWO + " <minimun area needed>\n" + commandTwoDiscription + "\n");
-		System.out.println(COMMAND_THREE + "\n" + commandThreeDiscription + "\n");
-		System.out.println(COMMAND_FOUR + "\n" + commandFourDiscription + "\n");
-		System.out.println(COMMAND_FIVE + "\n" + commandFiveDiscription + "\n");
-		System.out.println(COMMAND_SIX + " <ward,name,year>\n" + commandSixDiscription + "\n");
+		System.out.println(COMMAND_ONE + " <desired address to look up>\n" + commandOneDescription + "\n");
+		System.out.println(COMMAND_TWO + " <minimum area needed>\n" + commandTwoDescription + "\n");
+		System.out.println(COMMAND_THREE + "\n" + commandThreeDescription + "\n");
+		System.out.println(COMMAND_FOUR + "\n" + commandFourDescription + "\n");
+		System.out.println(COMMAND_FIVE + "\n" + commandFiveDescription + "\n");
+		System.out.println(COMMAND_SIX + " <ward,name,year>\n" + commandSixDescription + "\n");
 		System.out.println(HELP_COMMAND + " - Get help" + "\n");
 		System.out.println(QUIT_COMMAND + " - Exit the program" + "\n");
 		System.out.println("---- end help ----- ");
+
 	}
 
 }
